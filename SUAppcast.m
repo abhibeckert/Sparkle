@@ -3,7 +3,7 @@
 //  Sparkle
 //
 //  Created by Andy Matuschak on 3/12/06.
-//  Copyright 2006 Andy Matuschak. All rights reserved.
+//  Copyright Andy Matuschak, Abhi Beckert. All rights reserved.
 //
 
 #import "SUUpdater.h"
@@ -14,7 +14,9 @@
 #import "SUAppcast.h"
 #import "SUConstants.h"
 #import "SULog.h"
+#import "SUAppcastXMLParser.h"
 
+#ifndef SHIMMER_REFACTOR
 @interface NSXMLElement (SUAppcastExtensions)
 - (NSDictionary *)attributesAsDictionary;
 @end
@@ -31,10 +33,13 @@
 	return dictionary;
 }
 @end
+#endif
 
 @interface SUAppcast (Private)
 - (void)reportError:(NSError *)error;
+#ifndef SHIMMER_REFACTOR
 - (NSXMLNode *)bestNodeInNodes:(NSArray *)nodes;
+#endif
 @end
 
 @implementation SUAppcast
@@ -45,10 +50,10 @@
 	items = nil;
 	[userAgentString release];
 	userAgentString = nil;
-	[downloadFilename release];
-	downloadFilename = nil;
-	[download release];
-	download = nil;
+	[downloadData release];
+	downloadData = nil;
+	[downloadConnection release];
+	downloadConnection = nil;
 	
 	[super dealloc];
 }
@@ -63,59 +68,56 @@
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url cachePolicy:NSURLRequestReloadIgnoringCacheData timeoutInterval:30.0];
     if (userAgentString)
         [request setValue:userAgentString forHTTPHeaderField:@"User-Agent"];
-            
-    download = [[NSURLDownload alloc] initWithRequest:request delegate:self];
+    
+    [downloadData release];
+    downloadData = nil;
+    
+    [downloadConnection release];
+    downloadConnection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
 }
 
-- (void)download:(NSURLDownload *)aDownload decideDestinationWithSuggestedFilename:(NSString *)filename
+- (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
 {
-	NSString* destinationFilename = NSTemporaryDirectory();
-	if (destinationFilename)
-	{
-		destinationFilename = [destinationFilename stringByAppendingPathComponent:filename];
-		[download setDestination:destinationFilename allowOverwrite:NO];
-	}
+  [downloadData release];
+  downloadData = [[NSMutableData alloc] init];
 }
 
-- (void)download:(NSURLDownload *)aDownload didCreateDestination:(NSString *)path
+- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data
 {
-    [downloadFilename release];
-    downloadFilename = [path copy];
+  [downloadData appendData:data];
 }
 
-- (void)downloadDidFinish:(NSURLDownload *)aDownload
-{    
+- (void)connectionDidFinishLoading:(NSURLConnection *)connection
+{
+  [downloadConnection release];
+  downloadConnection = nil;
+  
 	NSError *error = nil;
 	
-	NSXMLDocument *document = nil;
+	SUAppcastXMLParser *xmlParser = nil;
 	BOOL failed = NO;
 	NSArray *xmlItems = nil;
 	NSMutableArray *appcastItems = [NSMutableArray array];
 	
-	if (downloadFilename)
+	if (downloadData)
 	{
-		document = [[[NSXMLDocument alloc] initWithContentsOfURL:[NSURL fileURLWithPath:downloadFilename] options:0 error:&error] autorelease];
-	
-#if MAC_OS_X_VERSION_MIN_REQUIRED <= MAC_OS_X_VERSION_10_4
-		[[NSFileManager defaultManager] removeFileAtPath:downloadFilename handler:nil];
-#else
-		[[NSFileManager defaultManager] removeItemAtPath:downloadFilename error:nil];
-#endif
-		[downloadFilename release];
-		downloadFilename = nil;
+    xmlParser = [[[SUAppcastXMLParser alloc] initWithData:downloadData] autorelease];
+    
+		[downloadData release];
+		downloadData = nil;
 	}
 	else
 	{
 		failed = YES;
 	}
-    
-    if (nil == document)
+#ifndef SHIMMER_REFACTOR
+    if (nil == xmlParser)
     {
         failed = YES;
     }
     else
     {
-        xmlItems = [document nodesForXPath:@"/rss/channel/item" error:&error];
+        xmlItems = [xmlParser nodesForXPath:@"/rss/channel/item" error:&error];
         if (nil == xmlItems)
         {
             failed = YES;
@@ -220,27 +222,18 @@
     {
         [delegate appcastDidFinishLoading:self];
 	}
+#endif
 }
 
-- (void)download:(NSURLDownload *)aDownload didFailWithError:(NSError *)error
+- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error
 {
-	if (downloadFilename)
-	{
-#if MAC_OS_X_VERSION_MIN_REQUIRED <= MAC_OS_X_VERSION_10_4
-		[[NSFileManager defaultManager] removeFileAtPath:downloadFilename handler:nil];
-#else
-		[[NSFileManager defaultManager] removeItemAtPath:downloadFilename error:nil];
-#endif
-	}
-    [downloadFilename release];
-    downloadFilename = nil;
+  [downloadData release];
+  downloadData = nil;
+  
+  [downloadConnection release];
+  downloadConnection = nil;
     
 	[self reportError:error];
-}
-
-- (NSURLRequest *)download:(NSURLDownload *)aDownload willSendRequest:(NSURLRequest *)request redirectResponse:(NSURLResponse *)redirectResponse
-{
-	return request;
 }
 
 - (void)reportError:(NSError *)error
@@ -251,6 +244,7 @@
 	}
 }
 
+#ifndef SHIMMER_REFACTOR
 - (NSXMLNode *)bestNodeInNodes:(NSArray *)nodes
 {
 	// We use this method to pick out the localized version of a node when one's available.
@@ -275,6 +269,7 @@
         i = 0;
     return [nodes objectAtIndex:i];
 }
+#endif
 
 - (void)setUserAgentString:(NSString *)uas
 {

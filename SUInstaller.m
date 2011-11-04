@@ -3,7 +3,7 @@
 //  Sparkle
 //
 //  Created by Andy Matuschak on 4/10/08.
-//  Copyright 2008 Andy Matuschak. All rights reserved.
+//  Copyright Andy Matuschak, Abhi Beckert. All rights reserved.
 //
 
 #import "SUInstaller.h"
@@ -25,6 +25,7 @@ static NSString*	sUpdateFolder = nil;
 
 + (BOOL)isAliasFolderAtPath:(NSString *)path
 {
+#ifndef SHIMMER_REFACTOR
 	FSRef fileRef;
 	OSStatus err = noErr;
 	Boolean aliasFileFlag, folderFlag;
@@ -40,6 +41,9 @@ static NSString*	sUpdateFolder = nil;
 		return (BOOL)(aliasFileFlag && folderFlag);
 	else
 		return NO;	
+#else
+  return NO;
+#endif
 }
 
 
@@ -122,7 +126,7 @@ static NSString*	sUpdateFolder = nil;
 	// *** GETS CALLED ON NON-MAIN THREAD!
 	
 	SULog( @"mdimporting" );
-	
+#ifndef SHIMMER_REFACTOR
 	NSTask *mdimport = [[[NSTask alloc] init] autorelease];
 	[mdimport setLaunchPath:@"/usr/bin/mdimport"];
 	[mdimport setArguments:[NSArray arrayWithObject:[host installationPath]]];
@@ -136,6 +140,7 @@ static NSString*	sUpdateFolder = nil;
 		// No big deal.
 		SULog(@"Sparkle Error: %@", [launchException description]);
 	}
+#endif
 }
 
 

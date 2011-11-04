@@ -3,19 +3,21 @@
 //  Sparkle
 //
 //  Created by Andy Matuschak on 5/30/08.
-//  Copyright 2008 Andy Matuschak. All rights reserved.
+//  Copyright Andy Matuschak, Abhi Beckert. All rights reserved.
 //
 
 #ifndef SUUSERINITIATEDUPDATEDRIVER_H
 #define SUUSERINITIATEDUPDATEDRIVER_H
 
-#import <Cocoa/Cocoa.h>
+#import <UIKit/UIKit.h>
 #import "SUUIBasedUpdateDriver.h"
 
 @interface SUUserInitiatedUpdateDriver : SUUIBasedUpdateDriver
 {
 @private
+#ifndef SHIMMER_REFACTOR
 	SUStatusController *checkingController;
+#endif
 	BOOL isCanceled;
 }
 

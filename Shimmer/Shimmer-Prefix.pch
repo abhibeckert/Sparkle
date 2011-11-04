@@ -1,0 +1,25 @@
+//
+// Prefix header for all source files of the 'Shimmer' target in the 'Shimmer' project
+//
+
+#define SHIMMER_REFACTOR 1
+#ifndef NSAppKitVersionNumber10_4
+#define NSAppKitVersionNumber10_4 824
+#endif
+
+#ifndef NSAppKitVersionNumber10_5
+#define NSAppKitVersionNumber10_5 949
+#endif 
+
+#ifndef NSAppKitVersionNumber10_6
+#define NSAppKitVersionNumber10_6 1038
+#endif 
+
+#ifdef __OBJC__
+#define SPARKLE_BUNDLE [NSBundle bundleWithIdentifier:@"com.abhibeckert.Shimmer"]
+#define SULocalizedString(key,comment) NSLocalizedStringFromTableInBundle(key, @"Sparkle", SPARKLE_BUNDLE, comment)
+#define SUAbstractFail() NSAssert2(nil, @"Can't call %@ on an instance of %@; this is an abstract method!", __PRETTY_FUNCTION__, [self class]);
+
+#import <Foundation/Foundation.h>
+#import "SUConstants.h"
+#endif

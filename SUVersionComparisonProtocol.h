@@ -3,13 +3,13 @@
 //  Sparkle
 //
 //  Created by Andy Matuschak on 12/21/07.
-//  Copyright 2007 Andy Matuschak. All rights reserved.
+//  Copyright Andy Matuschak, Abhi Beckert. All rights reserved.
 //
 
 #ifndef SUVERSIONCOMPARISONPROTOCOL_H
 #define SUVERSIONCOMPARISONPROTOCOL_H
 
-#import <Cocoa/Cocoa.h>
+#import <UIKit/UIkit.h>
 
 /*!
     @protocol

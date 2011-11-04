@@ -3,13 +3,13 @@
 //  Sparkle
 //
 //  Created by Andy Matuschak on 3/16/06.
-//  Copyright 2006 Andy Matuschak. All rights reserved.
+//  Copyright Andy Matuschak, Abhi Beckert. All rights reserved.
 //
 
 #ifndef SUDSAVERIFIER_H
 #define SUDSAVERIFIER_H
 
-#import <Cocoa/Cocoa.h>
+#import <UIKit/UIKit.h>
 
 // For the paranoid folks!
 @interface SUDSAVerifier : NSObject {}

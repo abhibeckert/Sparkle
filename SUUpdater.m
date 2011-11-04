@@ -3,13 +3,15 @@
 //  Sparkle
 //
 //  Created by Andy Matuschak on 1/4/06.
-//  Copyright 2006 Andy Matuschak. All rights reserved.
+//  Copyright Andy Matuschak, Abhi Beckert. All rights reserved.
 //
 
 #import "SUUpdater.h"
 
 #import "SUHost.h"
+#ifndef SHIMMER_REFACTOR
 #import "SUUpdatePermissionPrompt.h"
+#endif
 
 #import "SUAutomaticUpdateDriver.h"
 #import "SUProbingUpdateDriver.h"
@@ -154,11 +156,13 @@ static NSString * const SUUpdaterDefaultsObservationContext = @"SUUpdaterDefault
     
     if (shouldPrompt)
     {
+#ifndef SHIMMER_REFACTOR
 		NSArray *profileInfo = [host systemProfile];
 		// Always say we're sending the system profile here so that the delegate displays the parameters it would send.
 		if ([delegate respondsToSelector:@selector(feedParametersForUpdater:sendingSystemProfile:)]) 
 			profileInfo = [profileInfo arrayByAddingObjectsFromArray:[delegate feedParametersForUpdater:self sendingSystemProfile:YES]];
         [SUUpdatePermissionPrompt promptWithHost:host systemProfile:profileInfo delegate:self];
+#endif
         // We start the update checks and register as observer for changes after the prompt finishes
 	}
     else 
@@ -168,12 +172,14 @@ static NSString * const SUUpdaterDefaultsObservationContext = @"SUUpdaterDefault
     }
 }
 
+#ifndef SHIMMER_REFACTOR
 - (void)updatePermissionPromptFinishedWithResult:(SUPermissionPromptResult)result
 {
 	[self setAutomaticallyChecksForUpdates:(result == SUAutomaticallyCheck)];
     // Schedule checks, but make sure we ignore the delayed call from KVO
 	[self resetUpdateCycle];
 }
+#endif
 
 - (void)updateDriverDidFinish:(NSNotification *)note
 {
@@ -238,14 +244,18 @@ static NSString * const SUUpdaterDefaultsObservationContext = @"SUUpdaterDefault
 		NSMutableDictionary*		theDict = [NSMutableDictionary dictionary];
 		[self performSelectorOnMainThread: @selector(putFeedURLIntoDictionary:) withObject: theDict waitUntilDone: YES];	// Get feed URL on main thread, it's not safe to call elsewhere.
 		
+#ifndef SHIMMER_REFACTOR
 		const char *hostname = [[[theDict objectForKey: @"feedURL"] host] cStringUsingEncoding: NSUTF8StringEncoding];
 		SCNetworkReachabilityRef reachability = SCNetworkReachabilityCreateWithName(NULL, hostname);
+#endif
         Boolean reachabilityResult = NO;
         // If the feed's using a file:// URL, we won't be able to use reachability.
+#ifndef SHIMMER_REFACTOR
         if (reachability != NULL) {
             SCNetworkReachabilityGetFlags(reachability, &flags);
             CFRelease(reachability);
         }
+#endif
 		
 		if( reachabilityResult )
 		{
@@ -333,8 +343,10 @@ static NSString * const SUUpdaterDefaultsObservationContext = @"SUUpdaterDefault
 - (void)registerAsObserver
 {
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateDriverDidFinish:) name:SUUpdateDriverFinishedNotification object:nil];
+#ifndef SHIMMER_REFACTOR
     [[NSUserDefaultsController sharedUserDefaultsController] addObserver:self forKeyPath:[@"values." stringByAppendingString:SUScheduledCheckIntervalKey] options:0 context:SUUpdaterDefaultsObservationContext];
     [[NSUserDefaultsController sharedUserDefaultsController] addObserver:self forKeyPath:[@"values." stringByAppendingString:SUEnableAutomaticChecksKey] options:0 context:SUUpdaterDefaultsObservationContext];
+#endif
 }
 
 - (void)unregisterAsObserver
@@ -342,8 +354,10 @@ static NSString * const SUUpdaterDefaultsObservationContext = @"SUUpdaterDefault
 	@try
 	{
 		[[NSNotificationCenter defaultCenter] removeObserver:self];
+#ifndef SHIMMER_REFACTOR
 		[[NSUserDefaultsController sharedUserDefaultsController] removeObserver:self forKeyPath:[@"values." stringByAppendingString:SUScheduledCheckIntervalKey]];
 		[[NSUserDefaultsController sharedUserDefaultsController] removeObserver:self forKeyPath:[@"values." stringByAppendingString:SUEnableAutomaticChecksKey]];
+#endif
 	}
 	@catch (NSException *e)
 	{
@@ -527,12 +541,14 @@ static NSString * const SUUpdaterDefaultsObservationContext = @"SUUpdaterDefault
 	[super dealloc];
 }
 
+#ifndef SHIMMER_REFACTOR
 - (BOOL)validateMenuItem:(NSMenuItem *)item
 {
 	if ([item action] == @selector(checkForUpdates:))
 		return ![self updateInProgress];
 	return YES;
 }
+#endif
 
 - (void)setDelegate:aDelegate
 {

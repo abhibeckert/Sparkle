@@ -8,6 +8,33 @@
 
 /* Begin PBXBuildFile section */
 		3772FEA913DE0B6B00F79537 /* SUVersionDisplayProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = 3772FEA813DE0B6B00F79537 /* SUVersionDisplayProtocol.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		384955C314613972003A19AA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 384955C214613972003A19AA /* Foundation.framework */; };
+		384955C914613972003A19AA /* Shimmer.m in Sources */ = {isa = PBXBuildFile; fileRef = 384955C814613972003A19AA /* Shimmer.m */; };
+		384955CF14613F01003A19AA /* SUUpdater.m in Sources */ = {isa = PBXBuildFile; fileRef = 61B5F8E409C4CE3C00B25A18 /* SUUpdater.m */; };
+		384955D114613F2C003A19AA /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 384955D014613F2C003A19AA /* UIKit.framework */; };
+		384955D21462669A003A19AA /* SUUpdater.h in Headers */ = {isa = PBXBuildFile; fileRef = 61B5F8E309C4CE3C00B25A18 /* SUUpdater.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		384955E114628234003A19AA /* SUVersionComparisonProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = 61A2259C0D1C495D00430CCD /* SUVersionComparisonProtocol.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		384955E314628240003A19AA /* SUVersionDisplayProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = 3772FEA813DE0B6B00F79537 /* SUVersionDisplayProtocol.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		384955E7146282AA003A19AA /* SUUserInitiatedUpdateDriver.m in Sources */ = {isa = PBXBuildFile; fileRef = 61A354540DF113C70076ECB1 /* SUUserInitiatedUpdateDriver.m */; };
+		384955E8146282E3003A19AA /* SUConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 61299A5F09CA6EB100B7442F /* SUConstants.m */; };
+		384955E9146282EF003A19AA /* SUProbingUpdateDriver.m in Sources */ = {isa = PBXBuildFile; fileRef = 6101347A0DD2541A0049ACDF /* SUProbingUpdateDriver.m */; };
+		384955EA14628308003A19AA /* SUAutomaticUpdateDriver.m in Sources */ = {isa = PBXBuildFile; fileRef = 61B93B260DD0FDD300DCD2F8 /* SUAutomaticUpdateDriver.m */; };
+		384955EB1462830E003A19AA /* SUScheduledUpdateDriver.m in Sources */ = {isa = PBXBuildFile; fileRef = 61B93C080DD112FF00DCD2F8 /* SUScheduledUpdateDriver.m */; };
+		384955EC1462831D003A19AA /* SUHost.m in Sources */ = {isa = PBXBuildFile; fileRef = 61EF67550E25B58D00F754E0 /* SUHost.m */; };
+		384955ED1462831F003A19AA /* SULog.m in Sources */ = {isa = PBXBuildFile; fileRef = 55C14F05136EF6DB00649790 /* SULog.m */; };
+		384955EE146285B3003A19AA /* SUBasicUpdateDriver.m in Sources */ = {isa = PBXBuildFile; fileRef = 61F83F700DBFE137006FDD30 /* SUBasicUpdateDriver.m */; };
+		384955EF146285B8003A19AA /* SUUIBasedUpdateDriver.m in Sources */ = {isa = PBXBuildFile; fileRef = 61B93A3A0DD02D6400DCD2F8 /* SUUIBasedUpdateDriver.m */; };
+		384955F0146285CB003A19AA /* SUUpdateDriver.m in Sources */ = {isa = PBXBuildFile; fileRef = 610134720DD250470049ACDF /* SUUpdateDriver.m */; };
+		384955F114628799003A19AA /* SUAppcast.m in Sources */ = {isa = PBXBuildFile; fileRef = 61B5FB9509C4F04600B25A18 /* SUAppcast.m */; };
+		384955F2146287A8003A19AA /* SUPlainInstaller.m in Sources */ = {isa = PBXBuildFile; fileRef = 618FA5040DAE8AB80026945C /* SUPlainInstaller.m */; };
+		384955F3146287B2003A19AA /* SUUnarchiver.m in Sources */ = {isa = PBXBuildFile; fileRef = 61299A8C09CA790200B7442F /* SUUnarchiver.m */; };
+		384955F4146287BD003A19AA /* SUStandardVersionComparator.m in Sources */ = {isa = PBXBuildFile; fileRef = 61A225A30D1C4AC000430CCD /* SUStandardVersionComparator.m */; };
+		384955F5146287C6003A19AA /* SUSystemProfiler.m in Sources */ = {isa = PBXBuildFile; fileRef = 61A2279B0D1CEE7600430CCD /* SUSystemProfiler.m */; };
+		3849560A14628A9B003A19AA /* SUInstaller.m in Sources */ = {isa = PBXBuildFile; fileRef = 618FA5000DAE88B40026945C /* SUInstaller.m */; };
+		3849560B14628AE8003A19AA /* SUPackageInstaller.m in Sources */ = {isa = PBXBuildFile; fileRef = 618FA5210DAE8E8A0026945C /* SUPackageInstaller.m */; };
+		3849560C14628C2D003A19AA /* SUBinaryDeltaCommon.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D06E8E20FD68CC7005AE3F6 /* SUBinaryDeltaCommon.m */; };
+		3849560F14628F78003A19AA /* SUAppcastXMLParser.h in Headers */ = {isa = PBXBuildFile; fileRef = 3849560D14628F78003A19AA /* SUAppcastXMLParser.h */; };
+		3849561014628F78003A19AA /* SUAppcastXMLParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 3849560E14628F78003A19AA /* SUAppcastXMLParser.m */; };
 		525A2790133D6AE900FD8D70 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 525A278F133D6AE900FD8D70 /* Cocoa.framework */; };
 		525A27A0133D6B9700FD8D70 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 525A278F133D6AE900FD8D70 /* Cocoa.framework */; };
 		550347011370023A00AE7681 /* Sparkle.icns in Resources */ = {isa = PBXBuildFile; fileRef = 550347001370023A00AE7681 /* Sparkle.icns */; };
@@ -183,6 +210,15 @@
 		0867D69BFE84028FC02AAC07 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
 		0867D6A5FE840307C02AAC07 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
 		3772FEA813DE0B6B00F79537 /* SUVersionDisplayProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SUVersionDisplayProtocol.h; sourceTree = "<group>"; };
+		384955C014613972003A19AA /* libShimmer.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libShimmer.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		384955C214613972003A19AA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		384955C614613972003A19AA /* Shimmer-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Shimmer-Prefix.pch"; sourceTree = "<group>"; };
+		384955C714613972003A19AA /* Shimmer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Shimmer.h; sourceTree = "<group>"; };
+		384955C814613972003A19AA /* Shimmer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Shimmer.m; sourceTree = "<group>"; };
+		384955D014613F2C003A19AA /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS5.0.sdk/System/Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
+		384956081462892F003A19AA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS5.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+		3849560D14628F78003A19AA /* SUAppcastXMLParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SUAppcastXMLParser.h; sourceTree = "<group>"; };
+		3849560E14628F78003A19AA /* SUAppcastXMLParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SUAppcastXMLParser.m; sourceTree = "<group>"; };
 		525A278F133D6AE900FD8D70 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
 		550347001370023A00AE7681 /* Sparkle.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = Sparkle.icns; sourceTree = "<group>"; };
 		55C14BB7136EEF1500649790 /* finish_installation.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = finish_installation.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -391,6 +427,15 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		384955BD14613972003A19AA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				384955D114613F2C003A19AA /* UIKit.framework in Frameworks */,
+				384955C314613972003A19AA /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		55C14BB5136EEF1500649790 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -458,6 +503,7 @@
 				612279D90DB5470200AB99EA /* Sparkle Unit Tests.octest */,
 				5D06E8D00FD68C7C005AE3F6 /* BinaryDelta */,
 				55C14BB7136EEF1500649790 /* finish_installation.app */,
+				384955C014613972003A19AA /* libShimmer.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -465,6 +511,8 @@
 		0867D691FE84028FC02AAC07 /* Sparkle */ = {
 			isa = PBXGroup;
 			children = (
+				384956081462892F003A19AA /* Foundation.framework */,
+				384955D014613F2C003A19AA /* UIKit.framework */,
 				61F83F6E0DBFE07A006FDD30 /* Update Control */,
 				61299B3909CB055000B7442F /* Appcast Support */,
 				618FA6DB0DB485440026945C /* Installation */,
@@ -477,6 +525,8 @@
 				61B5F91D09C4CF7F00B25A18 /* Test Application Sources */,
 				0867D69AFE84028FC02AAC07 /* Apple Frameworks and Libraries */,
 				FA1941C40D94A6EA00DD942E /* Configurations */,
+				384955C414613972003A19AA /* Shimmer */,
+				384955C114613972003A19AA /* Frameworks */,
 				034768DFFF38A50411DB9C8B /* Products */,
 			);
 			name = Sparkle;
@@ -514,6 +564,32 @@
 				55C14BD8136EF00C00649790 /* SUStatus.xib */,
 			);
 			name = "Framework Resources";
+			sourceTree = "<group>";
+		};
+		384955C114613972003A19AA /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				384955C214613972003A19AA /* Foundation.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		384955C414613972003A19AA /* Shimmer */ = {
+			isa = PBXGroup;
+			children = (
+				384955C714613972003A19AA /* Shimmer.h */,
+				384955C814613972003A19AA /* Shimmer.m */,
+				384955C514613972003A19AA /* Supporting Files */,
+			);
+			path = Shimmer;
+			sourceTree = "<group>";
+		};
+		384955C514613972003A19AA /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				384955C614613972003A19AA /* Shimmer-Prefix.pch */,
+			);
+			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
 		55C14BD5136EEFD000649790 /* finish_installation tool */ = {
@@ -577,6 +653,8 @@
 			children = (
 				61B5FB9409C4F04600B25A18 /* SUAppcast.h */,
 				61B5FB9509C4F04600B25A18 /* SUAppcast.m */,
+				3849560D14628F78003A19AA /* SUAppcastXMLParser.h */,
+				3849560E14628F78003A19AA /* SUAppcastXMLParser.m */,
 				61B5FC5309C5182000B25A18 /* SUAppcastItem.h */,
 				61B5FC5409C5182000B25A18 /* SUAppcastItem.m */,
 				61A2279A0D1CEE7600430CCD /* SUSystemProfiler.h */,
@@ -723,6 +801,17 @@
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
+		384955BE14613972003A19AA /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				384955D21462669A003A19AA /* SUUpdater.h in Headers */,
+				384955E314628240003A19AA /* SUVersionDisplayProtocol.h in Headers */,
+				384955E114628234003A19AA /* SUVersionComparisonProtocol.h in Headers */,
+				3849560F14628F78003A19AA /* SUAppcastXMLParser.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		8DC2EF500486A6940098B216 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
@@ -772,6 +861,23 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
+		384955BF14613972003A19AA /* Shimmer */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 384955CD14613972003A19AA /* Build configuration list for PBXNativeTarget "Shimmer" */;
+			buildPhases = (
+				384955BC14613972003A19AA /* Sources */,
+				384955BD14613972003A19AA /* Frameworks */,
+				384955BE14613972003A19AA /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Shimmer;
+			productName = Shimmer;
+			productReference = 384955C014613972003A19AA /* libShimmer.a */;
+			productType = "com.apple.product-type.library.static";
+		};
 		55C14BB6136EEF1500649790 /* finish_installation */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 55C14BBE136EEF1500649790 /* Build configuration list for PBXNativeTarget "finish_installation" */;
@@ -927,6 +1033,7 @@
 				612279D80DB5470200AB99EA /* Sparkle Unit Tests */,
 				5D06E8CF0FD68C7C005AE3F6 /* BinaryDelta */,
 				55C14BB6136EEF1500649790 /* finish_installation */,
+				384955BF14613972003A19AA /* Shimmer */,
 			);
 		};
 /* End PBXProject section */
@@ -1053,6 +1160,34 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		384955BC14613972003A19AA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				384955E8146282E3003A19AA /* SUConstants.m in Sources */,
+				384955C914613972003A19AA /* Shimmer.m in Sources */,
+				384955CF14613F01003A19AA /* SUUpdater.m in Sources */,
+				384955E9146282EF003A19AA /* SUProbingUpdateDriver.m in Sources */,
+				384955F0146285CB003A19AA /* SUUpdateDriver.m in Sources */,
+				384955ED1462831F003A19AA /* SULog.m in Sources */,
+				384955F4146287BD003A19AA /* SUStandardVersionComparator.m in Sources */,
+				384955EF146285B8003A19AA /* SUUIBasedUpdateDriver.m in Sources */,
+				384955F5146287C6003A19AA /* SUSystemProfiler.m in Sources */,
+				384955F3146287B2003A19AA /* SUUnarchiver.m in Sources */,
+				3849560C14628C2D003A19AA /* SUBinaryDeltaCommon.m in Sources */,
+				3849560A14628A9B003A19AA /* SUInstaller.m in Sources */,
+				384955EA14628308003A19AA /* SUAutomaticUpdateDriver.m in Sources */,
+				3849560B14628AE8003A19AA /* SUPackageInstaller.m in Sources */,
+				384955EE146285B3003A19AA /* SUBasicUpdateDriver.m in Sources */,
+				384955F114628799003A19AA /* SUAppcast.m in Sources */,
+				384955F2146287A8003A19AA /* SUPlainInstaller.m in Sources */,
+				384955EB1462830E003A19AA /* SUScheduledUpdateDriver.m in Sources */,
+				384955EC1462831D003A19AA /* SUHost.m in Sources */,
+				384955E7146282AA003A19AA /* SUUserInitiatedUpdateDriver.m in Sources */,
+				3849561014628F78003A19AA /* SUAppcastXMLParser.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		55C14BB4136EEF1500649790 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1315,6 +1450,90 @@
 			};
 			name = Release;
 		};
+		384955CA14613972003A19AA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = (
+					armv6,
+					"$(ARCHS_STANDARD_32_BIT)",
+				);
+				COPY_PHASE_STRIP = NO;
+				DSTROOT = /tmp/Shimmer.dst;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Shimmer/Shimmer-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		384955CB14613972003A19AA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = (
+					armv6,
+					"$(ARCHS_STANDARD_32_BIT)",
+				);
+				COPY_PHASE_STRIP = YES;
+				DSTROOT = /tmp/Shimmer.dst;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Shimmer/Shimmer-Prefix.pch";
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		384955CC14613972003A19AA /* Release (GC dual-mode; 10.5-only) */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = (
+					armv6,
+					"$(ARCHS_STANDARD_32_BIT)",
+				);
+				COPY_PHASE_STRIP = YES;
+				DSTROOT = /tmp/Shimmer.dst;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Shimmer/Shimmer-Prefix.pch";
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = "Release (GC dual-mode; 10.5-only)";
+		};
 		55C14BBB136EEF1500649790 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = FA1941D30D94A70100DD942E /* ConfigRelaunchDebug.xcconfig */;
@@ -1476,6 +1695,16 @@
 				1DEB91B208733DA50010E9CD /* Debug */,
 				1DEB91B308733DA50010E9CD /* Release */,
 				61072EAD0DF263BD008FE88B /* Release (GC dual-mode; 10.5-only) */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		384955CD14613972003A19AA /* Build configuration list for PBXNativeTarget "Shimmer" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				384955CA14613972003A19AA /* Debug */,
+				384955CB14613972003A19AA /* Release */,
+				384955CC14613972003A19AA /* Release (GC dual-mode; 10.5-only) */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

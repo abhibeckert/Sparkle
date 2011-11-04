@@ -3,24 +3,28 @@
 //  Sparkle
 //
 //  Created by Andy Matuschak on 5/30/08.
-//  Copyright 2008 Andy Matuschak. All rights reserved.
+//  Copyright Andy Matuschak, Abhi Beckert. All rights reserved.
 //
 
 #import "SUUserInitiatedUpdateDriver.h"
 
+#ifndef SHIMMER_REFACTOR
 #import "SUStatusController.h"
+#endif
 #import "SUHost.h"
 
 @implementation SUUserInitiatedUpdateDriver
 
 - (void)closeCheckingWindow
 {
+#ifndef SHIMMER_REFACTOR
 	if (checkingController)
 	{
 		[[checkingController window] close];
 		[checkingController release];
 		checkingController = nil;
 	}
+#endif
 }
 
 - (void)cancelCheckForUpdates:sender
@@ -31,18 +35,22 @@
 
 - (void)checkForUpdatesAtURL:(NSURL *)URL host:(SUHost *)aHost
 {
+#ifndef SHIMMER_REFACTOR
 	checkingController = [[SUStatusController alloc] initWithHost:aHost];
 	[[checkingController window] center]; // Force the checking controller to load its window.
 	[checkingController beginActionWithTitle:SULocalizedString(@"Checking for updates...", nil) maxProgressValue:0.0 statusText:nil];
 	[checkingController setButtonTitle:SULocalizedString(@"Cancel", nil) target:self action:@selector(cancelCheckForUpdates:) isDefault:NO];
 	[checkingController showWindow:self];
+#endif
 	[super checkForUpdatesAtURL:URL host:aHost];
 	
 	// For background applications, obtain focus.
 	// Useful if the update check is requested from another app like System Preferences.
 	if ([aHost isBackgroundApplication])
 	{
+#ifndef SHIMMER_REFACTOR
 		[NSApp activateIgnoringOtherApps:YES];
+#endif
 	}
 }
 

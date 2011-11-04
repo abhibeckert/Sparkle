@@ -3,13 +3,13 @@
 //  Sparkle
 //
 //  Created by Andy Matuschak on 12/22/07.
-//  Copyright 2007 Andy Matuschak. All rights reserved.
+//  Copyright Andy Matuschak, Abhi Beckert. All rights reserved.
 //
 
 #ifndef SUSYSTEMPROFILER_H
 #define SUSYSTEMPROFILER_H
 
-#import <Cocoa/Cocoa.h>
+#import <UIKit/UIKit.h>
 
 @class SUHost;
 @interface SUSystemProfiler : NSObject {}

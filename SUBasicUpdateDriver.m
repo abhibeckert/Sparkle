@@ -3,7 +3,7 @@
 //  Sparkle
 //
 //  Created by Andy Matuschak on 4/23/08.
-//  Copyright 2008 Andy Matuschak. All rights reserved.
+//  Copyright Andy Matuschak, Abhi Beckert. All rights reserved.
 //
 
 #import "SUBasicUpdateDriver.h"
@@ -142,9 +142,12 @@
 {
 	NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[updateItem fileURL]];
 	[request setValue:[updater userAgentString] forHTTPHeaderField:@"User-Agent"];
+#ifndef SHIMMER_REFACTOR
 	download = [[NSURLDownload alloc] initWithRequest:request delegate:self];
+#endif
 }
 
+#ifndef SHIMMER_REFACTOR
 - (void)download:(NSURLDownload *)d decideDestinationWithSuggestedFilename:(NSString *)name
 {
 	// If name ends in .txt, the server probably has a stupid MIME configuration. We'll give the developer the benefit of the doubt and chop that off.
@@ -209,6 +212,7 @@
 	// Note that we use a substring matching here instead of direct comparison because the docs say "application/gzip" but the system *uses* "application/x-gzip". This is a documentation bug.
 	return ([encodingType rangeOfString:@"gzip"].location == NSNotFound);
 }
+#endif
 
 - (void)extractUpdate
 {	
@@ -311,10 +315,12 @@
     NSString *pathToRelaunch = [host bundlePath];
     if ([[updater delegate] respondsToSelector:@selector(pathToRelaunchForUpdater:)])
         pathToRelaunch = [[updater delegate] pathToRelaunchForUpdater:updater];
+#ifndef SHIMMER_REFACTOR
     NSString *relaunchToolPath = [relaunchPath stringByAppendingPathComponent: @"/Contents/MacOS/finish_installation"];
     [NSTask launchedTaskWithLaunchPath: relaunchToolPath arguments:[NSArray arrayWithObjects:pathToRelaunch, [NSString stringWithFormat:@"%d", [[NSProcessInfo processInfo] processIdentifier]], tempDir, relaunch ? @"1" : @"0", nil]];
 
     [NSApp terminate:self];
+#endif
 }
 
 - (void)cleanUpDownload
@@ -328,8 +334,10 @@
         NSError	*	error = nil;
         success = [[NSFileManager defaultManager] removeItemAtPath: tempDir error: &error]; // Clean up the copied relauncher
 #endif
+#ifndef SHIMMER_REFACTOR
 		if( !success )
 			[[NSWorkspace sharedWorkspace] performFileOperation:NSWorkspaceRecycleOperation source:[tempDir stringByDeletingLastPathComponent] destination:@"" files:[NSArray arrayWithObject:[tempDir lastPathComponent]] tag:NULL];
+#endif
 	}
 }
 
@@ -359,8 +367,10 @@
 		SULog(@"Sparkle Error: %@", [error localizedDescription]);
 	if ([error localizedFailureReason])
 		SULog(@"Sparkle Error (continued): %@", [error localizedFailureReason]);
+#ifndef SHIMMER_REFACTOR
 	if (download)
 		[download cancel];
+#endif
 	[self abortUpdate];
 }
 
@@ -368,7 +378,9 @@
 {
 	[updateItem release];
 	[nonDeltaUpdateItem release];
+#ifndef SHIMMER_REFACTOR
 	[download release];
+#endif
 	[downloadPath release];
 	[tempDir release];
 	[relaunchPath release];

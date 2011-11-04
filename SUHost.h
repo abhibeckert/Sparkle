@@ -2,7 +2,7 @@
 //  SUHost.h
 //  Sparkle
 //
-//  Copyright 2008 Andy Matuschak. All rights reserved.
+//  Copyright Andy Matuschak, Abhi Beckert. All rights reserved.
 //
 
 #import "SUUpdater.h"
@@ -26,7 +26,9 @@
 - (NSString *)name;
 - (NSString *)version;
 - (NSString *)displayVersion;
-- (NSImage *)icon;
+#ifndef SHIMMER_REFACTOR
+- (UIImage *)icon;
+#endif
 - (BOOL)isRunningOnReadOnlyVolume;
 - (BOOL)isBackgroundApplication;
 - (NSString *)publicDSAKey;

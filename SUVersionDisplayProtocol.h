@@ -3,10 +3,10 @@
 //  EyeTV
 //
 //  Created by Uli Kusterer on 08.12.09.
-//  Copyright 2009 Elgato Systems GmbH. All rights reserved.
+//  Copyright Elgato Systems GmbH, Abhi Beckert. All rights reserved.
 //
 
-#import <Cocoa/Cocoa.h>
+#import <UIKit/UIKit.h>
 
 
 /*!

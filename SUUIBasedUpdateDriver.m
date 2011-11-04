@@ -3,21 +3,26 @@
 //  Sparkle
 //
 //  Created by Andy Matuschak on 5/5/08.
-//  Copyright 2008 Andy Matuschak. All rights reserved.
+//  Copyright Andy Matuschak, Abhi Beckert. All rights reserved.
 //
 
 #import "SUUIBasedUpdateDriver.h"
 
+#ifndef SHIMMER_REFACTOR
 #import "SUUpdateAlert.h"
+#endif
 #import "SUUpdater_Private.h"
 #import "SUHost.h"
+#ifndef SHIMMER_REFACTOR
 #import "SUStatusController.h"
+#endif
 #import "SUConstants.h"
 
 @implementation SUUIBasedUpdateDriver
 
 - (void)didFindValidUpdate
 {
+#ifndef SHIMMER_REFACTOR
 	updateAlert = [[SUUpdateAlert alloc] initWithAppcastItem:updateItem host:host];
 	[updateAlert setDelegate:self];
 	
@@ -43,24 +48,29 @@
 		[[updateAlert window] makeKeyAndOrderFront:self];
 	else
 		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationDidBecomeActive:) name:NSApplicationDidBecomeActiveNotification object:NSApp];
+#endif
 }
 
 - (void)didNotFindUpdate
 {
 	if ([[updater delegate] respondsToSelector:@selector(updaterDidNotFindUpdate:)])
 		[[updater delegate] updaterDidNotFindUpdate:updater];
-	
+#ifndef SHIMMER_REFACTOR
 	NSAlert *alert = [NSAlert alertWithMessageText:SULocalizedString(@"You're up-to-date!", nil) defaultButton:SULocalizedString(@"OK", nil) alternateButton:nil otherButton:nil informativeTextWithFormat:SULocalizedString(@"%@ %@ is currently the newest version available.", nil), [host name], [host displayVersion]];
 	[self showModalAlert:alert];
+#endif
 	[self abortUpdate];
 }
 
 - (void)applicationDidBecomeActive:(NSNotification *)aNotification
 {
+#ifndef SHIMMER_REFACTOR
 	[[updateAlert window] makeKeyAndOrderFront:self];
 	[[NSNotificationCenter defaultCenter] removeObserver:self name:@"NSApplicationDidBecomeActiveNotification" object:NSApp];
+#endif
 }
 
+#ifndef SHIMMER_REFACTOR
 - (void)updateAlert:(SUUpdateAlert *)alert finishedWithChoice:(SUUpdateAlertChoice)choice
 {
 	[updateAlert release]; updateAlert = nil;
@@ -90,7 +100,9 @@
 			break;			
 	}			
 }
+#endif
 
+#ifndef SHIMMER_REFACTOR
 - (void)download:(NSURLDownload *)download didReceiveResponse:(NSURLResponse *)response
 {
 	[statusController setMaxProgressValue:[response expectedContentLength]];
@@ -118,25 +130,30 @@
 	else
 		[statusController setStatusText:[NSString stringWithFormat:SULocalizedString(@"%@ downloaded", nil), [self humanReadableSizeFromDouble:[statusController progressValue]]]];
 }
-
+#endif
 - (IBAction)cancelDownload: (id)sender
 {
+#ifndef SHIMMER_REFACTOR
 	if (download)
 		[download cancel];
+#endif
 	[self abortUpdate];
 }
 
 - (void)extractUpdate
 {
+#ifndef SHIMMER_REFACTOR
 	// Now we have to extract the downloaded archive.
 	[statusController beginActionWithTitle:SULocalizedString(@"Extracting update...", @"Take care not to overflow the status window.") maxProgressValue:0.0 statusText:nil];
 	[statusController setButtonEnabled:NO];
+#endif
 	[super extractUpdate];
 }
 
 - (void)unarchiver:(SUUnarchiver *)ua extractedLength:(unsigned long)length
 {
 	// We do this here instead of in extractUpdate so that we only have a determinate progress bar for archives with progress.
+#ifndef SHIMMER_REFACTOR
 	if ([statusController maxProgressValue] == 0.0)
 	{
 		NSDictionary * attributes;
@@ -148,16 +165,19 @@
 		[statusController setMaxProgressValue:[[attributes objectForKey:NSFileSize] doubleValue]];
 	}
 	[statusController setProgressValue:[statusController progressValue] + (double)length];
+#endif
 }
 
 - (void)unarchiverDidFinish:(SUUnarchiver *)ua
 {
+#ifndef SHIMMER_REFACTOR
 	[statusController beginActionWithTitle:SULocalizedString(@"Ready to Install", nil) maxProgressValue:1.0 statusText:nil];
 	[statusController setProgressValue:1.0]; // Fill the bar.
 	[statusController setButtonEnabled:YES];
 	[statusController setButtonTitle:SULocalizedString(@"Install and Relaunch", nil) target:self action:@selector(installAndRestart:) isDefault:YES];
 	[[statusController window] makeKeyAndOrderFront: self];
 	[NSApp requestUserAttention:NSInformationalRequest];	
+#endif
 }
 
 - (void)installAndRestart: (id)sender
@@ -167,6 +187,7 @@
 
 - (void)installWithToolAndRelaunch:(BOOL)relaunch
 {
+#ifndef SHIMMER_REFACTOR
 	[statusController beginActionWithTitle:SULocalizedString(@"Installing update...", @"Take care not to overflow the status window.") maxProgressValue:0.0 statusText:nil];
 	[statusController setButtonEnabled:NO];
 	[super installWithToolAndRelaunch:relaunch];
@@ -183,26 +204,32 @@
 		[statusController autorelease];
 		statusController = nil;
 	}
+#endif
 }
 
 - (void)abortUpdateWithError:(NSError *)error
 {
+#ifndef SHIMMER_REFACTOR
 	NSAlert *alert = [NSAlert alertWithMessageText:SULocalizedString(@"Update Error!", nil) defaultButton:SULocalizedString(@"Cancel Update", nil) alternateButton:nil otherButton:nil informativeTextWithFormat:[error localizedDescription]];
 	[self showModalAlert:alert];
+#endif
 	[super abortUpdateWithError:error];
 }
 
 - (void)abortUpdate
 {
+#ifndef SHIMMER_REFACTOR
 	if (statusController)
 	{
 		[statusController close];
 		[statusController autorelease];
 		statusController = nil;
 	}
+#endif
 	[super abortUpdate];
 }
 
+#ifndef SHIMMER_REFACTOR
 - (void)showModalAlert:(NSAlert *)alert
 {
 	if ([[updater delegate] respondsToSelector:@selector(updaterWillShowModalAlert:)])
@@ -218,5 +245,6 @@
 	if ([[updater delegate] respondsToSelector:@selector(updaterDidShowModalAlert:)])
 		[[updater delegate] updaterDidShowModalAlert: updater];
 }
+#endif
 
 @end

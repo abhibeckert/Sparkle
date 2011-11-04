@@ -3,24 +3,32 @@
 //  Sparkle
 //
 //  Created by Andy Matuschak on 5/5/08.
-//  Copyright 2008 Andy Matuschak. All rights reserved.
+//  Copyright Andy Matuschak, Abhi Beckert. All rights reserved.
 //
 
 #ifndef SUUIBASEDUPDATEDRIVER_H
 #define SUUIBASEDUPDATEDRIVER_H
 
-#import <Cocoa/Cocoa.h>
+#import <UIKit/UIKit.h>
 #import "SUBasicUpdateDriver.h"
 
+#ifndef SHIMMER_REFACTOR
 @class SUStatusController, SUUpdateAlert;
+#else
+@class SUUpdateAlert;
+#endif
 
 @interface SUUIBasedUpdateDriver : SUBasicUpdateDriver
 {
+#ifndef SHIMMER_REFACTOR
 	SUStatusController *statusController;
 	SUUpdateAlert *updateAlert;
+#endif
 }
 
+#ifndef SHIMMER_REFACTOR
 - (void)showModalAlert:(NSAlert *)alert;
+#endif
 - (IBAction)cancelDownload: (id)sender;
 - (void)installAndRestart: (id)sender;
 

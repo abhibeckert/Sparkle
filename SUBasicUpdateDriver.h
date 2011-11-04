@@ -3,13 +3,13 @@
 //  Sparkle,
 //
 //  Created by Andy Matuschak on 4/23/08.
-//  Copyright 2008 Andy Matuschak. All rights reserved.
+//  Copyright Andy Matuschak, Abhi Beckert. All rights reserved.
 //
 
 #ifndef SUBASICUPDATEDRIVER_H
 #define SUBASICUPDATEDRIVER_H
 
-#import <Cocoa/Cocoa.h>
+#import <UIKit/UIKit.h>
 #import "SUUpdateDriver.h"
 
 @class SUAppcastItem, SUUnarchiver, SUAppcast, SUUnarchiver, SUHost;
@@ -17,7 +17,9 @@
 	SUAppcastItem *updateItem;
 	SUAppcastItem *nonDeltaUpdateItem;
 	
+#ifndef SHIMMER_REFACTOR
 	NSURLDownload *download;
+#endif
 	NSString *downloadPath;
 	NSString *tempDir;
 	
@@ -37,9 +39,11 @@
 - (void)didNotFindUpdate;
 
 - (void)downloadUpdate;
+#ifndef SHIMMER_REFACTOR
 - (void)download:(NSURLDownload *)d decideDestinationWithSuggestedFilename:(NSString *)name;
 - (void)downloadDidFinish:(NSURLDownload *)d;
 - (void)download:(NSURLDownload *)download didFailWithError:(NSError *)error;
+#endif
 
 - (void)extractUpdate;
 - (void)unarchiverDidFinish:(SUUnarchiver *)ua;

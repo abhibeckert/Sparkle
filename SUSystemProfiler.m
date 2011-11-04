@@ -3,7 +3,7 @@
 //  Sparkle
 //
 //  Created by Andy Matuschak on 12/22/07.
-//  Copyright 2007 Andy Matuschak. All rights reserved.
+//  Copyright Andy Matuschak, Abhi Beckert. All rights reserved.
 //  Adapted from Sparkle+, by Tom Harrington.
 //
 
@@ -50,8 +50,10 @@
 		cpuType = value;
 		NSString *visibleCPUType;
 		switch(value) {
+#ifndef SHIMMER_REFACTOR
 			case CPU_TYPE_X86:		visibleCPUType = @"Intel";		break;
 			case CPU_TYPE_POWERPC:	visibleCPUType = @"PowerPC";	break;
+#endif
 			default:				visibleCPUType = @"Unknown";	break;
 		}
 		[profileArray addObject:[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"cputype",@"CPU Type", [NSNumber numberWithInt:value], visibleCPUType,nil] forKeys:profileDictKeys]];
@@ -124,6 +126,7 @@
 	
 	// Number of displays?
 	// CPU speed
+#ifndef SHIMMER_REFACTOR
 	SInt32 gestaltInfo;
 	OSErr err = Gestalt(gestaltProcClkSpeedMHz,&gestaltInfo);
 	if (err == noErr)
@@ -133,6 +136,7 @@
 	err = Gestalt(gestaltPhysicalRAMSizeInMegabytes,&gestaltInfo);
 	if (err == noErr)
 		[profileArray addObject:[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"ramMB",@"Memory (MB)", [NSNumber numberWithInt:gestaltInfo], [NSNumber numberWithInt:gestaltInfo],nil] forKeys:profileDictKeys]];
+#endif
 	
 	return profileArray;
 }

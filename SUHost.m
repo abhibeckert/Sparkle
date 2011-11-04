@@ -2,7 +2,7 @@
 //  SUHost.m
 //  Sparkle
 //
-//  Copyright 2008 Andy Matuschak. All rights reserved.
+//  Copyright Andy Matuschak, Abhi Beckert. All rights reserved.
 //
 
 #import "SUHost.h"
@@ -97,6 +97,7 @@
 		return [self version]; // Fall back on the normal version string.
 }
 
+#ifndef SHIMMER_REFACTOR
 - (NSImage *)icon
 {
 	// Cache the application icon.
@@ -123,6 +124,7 @@
 	}
 	return icon;
 }
+#endif
 
 - (BOOL)isRunningOnReadOnlyVolume
 {	
@@ -133,6 +135,7 @@
 
 - (BOOL)isBackgroundApplication
 {
+#ifndef SHIMMER_REFACTOR
 	ProcessSerialNumber PSN;
 	GetCurrentProcess(&PSN);
 	CFDictionaryRef processInfo = ProcessInformationCopyDictionary(&PSN, kProcessDictionaryIncludeAllInformationMask);
@@ -140,6 +143,9 @@
 	if (processInfo)
 		CFRelease(processInfo);
 	return isElement;
+#else
+  return NO;
+#endif
 }
 
 - (NSString *)publicDSAKey
@@ -237,6 +243,7 @@
 
 + (NSString *)systemVersionString
 {
+#ifndef SHIMMER_REFACTOR
 	// This returns a version string of the form X.Y.Z
 	// There may be a better way to deal with the problem that gestaltSystemVersionMajor
 	//  et al. are not defined in 10.3, but this is probably good enough.
@@ -257,6 +264,9 @@
 		verStr = [[NSDictionary dictionaryWithContentsOfFile:versionPlistPath] objectForKey:@"ProductVersion"];
 	}
 	return verStr;
+#else
+  return @"5.0.0";
+#endif
 }
 
 @end

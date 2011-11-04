@@ -3,7 +3,7 @@
 //  Sparkle
 //
 //  Created by Andy Matuschak on 3/12/06.
-//  Copyright 2006 Andy Matuschak. All rights reserved.
+//  Copyright Andy Matuschak, Abhi Beckert. All rights reserved.
 //
 
 #ifndef SUAPPCAST_H
@@ -16,8 +16,8 @@
 	NSArray *items;
 	NSString *userAgentString;
 	id delegate;
-	NSString *downloadFilename;
-	NSURLDownload *download;
+	NSMutableData *downloadData;
+	NSURLConnection *downloadConnection;
 }
 
 - (void)fetchAppcastFromURL:(NSURL *)url;

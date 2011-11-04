@@ -3,13 +3,15 @@
 //  Sparkle
 //
 //  Created by Andy Matuschak on 3/18/06.
-//  Copyright 2006 Andy Matuschak. All rights reserved.
+//  Copyright Andy Matuschak, Abhi Beckert. All rights reserved.
 //
 
 #ifndef SUAUTOMATICUPDATEALERT_H
 #define SUAUTOMATICUPDATEALERT_H
 
+#ifndef SHIMMER_REFACTOR
 #import "SUWindowController.h"
+#endif
 
 typedef enum
 {

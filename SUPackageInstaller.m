@@ -3,11 +3,11 @@
 //  Sparkle
 //
 //  Created by Andy Matuschak on 4/10/08.
-//  Copyright 2008 Andy Matuschak. All rights reserved.
+//  Copyright Andy Matuschak, Abhi Beckert. All rights reserved.
 //
 
 #import "SUPackageInstaller.h"
-#import <Cocoa/Cocoa.h>
+#import <UIKit/UIKit.h>
 #import "SUConstants.h"
 
 NSString *SUPackageInstallerCommandKey = @"SUPackageInstallerCommand";
@@ -26,8 +26,10 @@ NSString *SUPackageInstallerDelegateKey = @"SUPackageInstallerDelegate";
 {
 	NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
 	
+#ifndef SHIMMER_REFACTOR
 	NSTask *installer = [NSTask launchedTaskWithLaunchPath:[info objectForKey:SUPackageInstallerCommandKey] arguments:[info objectForKey:SUPackageInstallerArgumentsKey]];
 	[installer waitUntilExit];
+#endif
 	
 	// Known bug: if the installation fails or is canceled, Sparkle goes ahead and restarts, thinking everything is fine.
 	[self performSelectorOnMainThread:@selector(finishInstallationWithInfo:) withObject:info waitUntilDone:NO];
@@ -39,12 +41,13 @@ NSString *SUPackageInstallerDelegateKey = @"SUPackageInstallerDelegate";
 {
 	NSString *command;
 	NSArray *args;
-	
+#ifndef SHIMMER_REFACTOR
 	if (floor(NSAppKitVersionNumber) == NSAppKitVersionNumber10_4) {
 		// 10.4 uses Installer.app because the "open" command in 10.4 doesn't support -W and -n
 		command = [[NSBundle bundleWithIdentifier:@"com.apple.installer"] executablePath];
 		args = [NSArray arrayWithObjects:path, nil];
 	} else {
+#endif
 		// 10.5 and later. Run installer using the "open" command to ensure it is launched in front of current application.
 		// The -W and -n options were added to the 'open' command in 10.5
 		// -W = wait until the app has quit.
@@ -52,7 +55,9 @@ NSString *SUPackageInstallerDelegateKey = @"SUPackageInstallerDelegate";
 		// -b = app bundle identifier
 		command = @"/usr/bin/open";
 		args = [NSArray arrayWithObjects:@"-W", @"-n", @"-b", @"com.apple.installer", path, nil];
+#ifndef SHIMMER_REFACTOR
 	}
+#endif
 	if (![[NSFileManager defaultManager] fileExistsAtPath:command])
 	{
 		NSError *error = [NSError errorWithDomain:SUSparkleErrorDomain code:SUMissingInstallerToolError userInfo:[NSDictionary dictionaryWithObject:@"Couldn't find Apple's installer tool!" forKey:NSLocalizedDescriptionKey]];

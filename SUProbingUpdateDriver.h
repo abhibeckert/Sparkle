@@ -3,13 +3,13 @@
 //  Sparkle
 //
 //  Created by Andy Matuschak on 5/7/08.
-//  Copyright 2008 Andy Matuschak. All rights reserved.
+//  Copyright Andy Matuschak, Abhi Beckert. All rights reserved.
 //
 
 #ifndef SUPROBINGUPDATEDRIVER_H
 #define SUPROBINGUPDATEDRIVER_H
 
-#import <Cocoa/Cocoa.h>
+#import <UIKit/UIKit.h>
 #import "SUBasicUpdateDriver.h"
 
 // This replaces the old SUStatusChecker.
